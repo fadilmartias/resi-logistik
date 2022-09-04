@@ -25,7 +25,7 @@ class ResiSeeder extends Seeder
             'layanan' => 'antar',
             'pengirim' => 'padel', 
             'penerima' => 'ridu',
-            'status' => 'sedang diantar'
+            'history_id' => '1'
         ]);
     }
 }

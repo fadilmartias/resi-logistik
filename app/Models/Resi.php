@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\History;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Resi extends Model
 {
@@ -18,6 +20,13 @@ class Resi extends Model
         'layanan',
         'pengirim',
         'penerima',
-        'status',
+        'history_id',
     ];
+
+
+    public function history(): HasMany
+    {
+        return $this->hasMany(History::class, 'id', 'history_id');
+    }
+
 }

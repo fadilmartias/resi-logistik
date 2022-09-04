@@ -23,8 +23,7 @@ return new class extends Migration
             $table->string('layanan');
             $table->string('pengirim');
             $table->string('penerima');
-            $table->string('status');
-            $table->unsignedBigInteger('history_id')->constrained();
+            $table->foreignId('history_id')->constrained();
             $table->timestamps();
         });
     }

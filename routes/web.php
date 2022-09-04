@@ -18,6 +18,7 @@ use App\Http\Controllers\DashboardController;
 Auth::routes();
 
 Route::get('/', [DashboardController::class, 'welcome'])->name('welcome');
+Route::post('/lacak', [DashboardController::class, 'lacak'])->name('lacak');
 
 Route::middleware(['auth'])->group(function () {
 
@@ -26,6 +27,8 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 //Resi Pengiriman
 Route::resource('resi-pengiriman', ResiController::class,);
 Route::get('/print/{id}', [ResiController::class, 'print'])->name('resi-pengiriman.print');
+Route::get('/check/{id}', [ResiController::class, 'check'])->name('resi-pengiriman.check');
+Route::get('/cancel/{id}', [ResiController::class, 'cancel'])->name('resi-pengiriman.cancel');
 
 //Update User Details
 Route::post('/update-profile/{id}', [App\Http\Controllers\HomeController::class, 'updateProfile'])->name('updateProfile');

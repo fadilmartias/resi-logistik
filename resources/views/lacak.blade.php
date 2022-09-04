@@ -68,9 +68,65 @@
                         @endif
                     </form>
                 </div>
+                <div class="col-lg-8 align-self-baseline">
+                    <button type="submit" class="btn btn-primary" id="tombol" data-bs-toggle="modal" data-bs-target="#riwayat">Tampilkan riwayat Anda</button>
+                </div>
             </div>
         </div>
     </header>
+    <!-- Modal -->
+    <div class="modal fade" id="riwayat" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="table-responsive">
+                                <table class="table mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Tanggal</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($history as $riwayat)
+                                            <tr>
+                                                <th scope="row">{{ $loop->index + 1 }}</th>
+                                                <td>{{ $riwayat->created_at }}</td>
+                                                <td>
+                                                    @if ($riwayat->status == 'Barang telah diterima oleh penerima')
+                                                        <p class="text-success">{{ $riwayat->status }}</p>
+                                                    @elseif ($riwayat->status == 'Pengiriman barang dibatalkan oleh kurir')
+                                                        <p class="text-danger">{{ $riwayat->status }}</p>
+                                                    @elseif ($riwayat->status == 'Barang telah dipacking dan siap dijemput oleh kurir')
+                                                        <p class="text-dark">{{ $riwayat->status }}</p>
+                                                    @else
+                                                        <p class="text-warning">{{ $riwayat->status }}</p>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Footer-->
     <footer class="bg-light py-5">
         <div class="container px-4 px-lg-5">
@@ -88,6 +144,10 @@
     <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    <script>
+        var myModal = new bootstrap.Modal(document.getElementById('riwayat'))
+        myModal.show()
+    </script>
 </body>
 
 </html>

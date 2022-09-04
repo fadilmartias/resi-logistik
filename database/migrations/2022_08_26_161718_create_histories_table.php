@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('histories', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('nomor_resi');
+            $table->string('status');
             $table->timestamps();
         });
     }
