@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-// use Barryvdh\DomPDF\PDF;
 use App\Models\Resi;
 use App\Models\History;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\App;
+use Dompdf\Dompdf;
 
 class ResiController extends Controller
 {
@@ -85,21 +86,23 @@ class ResiController extends Controller
     {
         $resi = Resi::findOrFail($id);
 
-        // return view('resi-pengiriman.preview', [
-        //     'resi' => $resi,
-        // ]);
+        return view('resi-pengiriman.preview', [
+            'resi' => $resi,
+        ]);
 
+        // $pdf = Pdf::loadView('resi-pengiriman.preview', ['resi' => $resi]);
+        // return $pdf->download('invoice.pdf');
 
-        // $customPaper = array(0,0,600,300);
-        // $pdf = App::make('snappy.pdf.wrapper');
+        // $customPaper = array(0,0,300,900);
+        // $pdf = App::make('dompdf.wrapper');
+        // $pdf = new Dompdf();
         // $html = view('resi-pengiriman.preview', ['resi' => $resi])->render();
         // $pdf->loadHtml($html);
         // $pdf->setPaper('A4', 'landscape');
         // $pdf->render();
-        // return $pdf->('invoice.pdf');
+        // return $pdf->stream('invoice.pdf');
 
-        // $pdf = PDF::loadView('resi-pengiriman.preview', ['resi' => $resi]);
-        // return $pdf->inline('invoice.pdf');
+
     }
 
 

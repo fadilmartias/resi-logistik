@@ -149,15 +149,17 @@
                                                 <tr>
                                                     <th scope="row"><?php echo e($loop->index + 1); ?></th>
                                                     <td><?php echo e($riwayat->created_at); ?></td>
-                                                    <td> <?php if($riwayat->status == 'Barang telah diterima oleh penerima'): ?>
+                                                    <td>
+                                                    <?php if($riwayat->status == 'Barang telah diterima oleh penerima'): ?>
                                                         <p class="text-success"><?php echo e($riwayat->status); ?></p>
                                                     <?php elseif($riwayat->status == 'Pengiriman barang dibatalkan oleh kurir'): ?>
                                                         <p class="text-danger"><?php echo e($riwayat->status); ?></p>
                                                     <?php elseif($riwayat->status == 'Barang telah dipacking dan siap dijemput oleh kurir'): ?>
                                                         <p class="text-dark"><?php echo e($riwayat->status); ?></p>
                                                     <?php else: ?>
-                                                        <p class="text-dark"><?php echo e($riwayat->status); ?></p>
-                                                    <?php endif; ?></td>
+                                                        <p class="text-warning"><?php echo e($riwayat->status); ?></p>
+                                                    <?php endif; ?>
+                                                    </td>
                                                 </tr>
                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                         </tbody>
