@@ -17,12 +17,15 @@ use App\Http\Controllers\DashboardController;
 */
 Auth::routes();
 
-Route::get('/', [DashboardController::class, 'welcome'])->name('welcome');
-Route::post('/lacak', [DashboardController::class, 'lacak'])->name('lacak');
+Route::middleware(['guest'])->group(function () {
+    Route::get('/', [DashboardController::class, 'welcome'])->name('welcome');
+    Route::post('/lacak', [DashboardController::class, 'lacak'])->name('lacak');
+});
+
 
 Route::middleware(['auth'])->group(function () {
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+// Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
 //Resi Pengiriman
 Route::resource('resi-pengiriman', ResiController::class,);

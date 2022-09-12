@@ -5,19 +5,19 @@
             <div class="navbar-brand-box">
                 <a href="index" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{ URL::asset('assets/images/logo-sm.svg') }}" alt="" height="30">
+                        <img src="{{ URL::asset('images/logos.jpg') }}" alt="" height="30" style="transform:rotate(90deg); height:30px;">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ URL::asset('assets/images/logo-sm.svg') }}" alt="" height="24"> <span class="logo-txt">Dason</span>
+                        <img src="{{ URL::asset('images/logos.jpg') }}" alt="" height="24" style="transform:rotate(90deg); height:30px;">
                     </span>
                 </a>
 
                 <a href="index" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="{{ URL::asset('assets/images/logo-sm.svg') }}" alt="" height="30">
+                        <img src="{{ URL::asset('images/logos.jpg') }}" alt="" height="30" style="transform:rotate(90deg); height:70px;">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{ URL::asset('assets/images/logo-sm.svg') }}" alt="" height="24"> <span class="logo-txt">Dason</span>
+                        <img src="{{ URL::asset('images/logos.jpg') }}" alt="" height="24" style="transform:rotate(90deg); height:70px;">
                     </span>
                 </a>
             </div>
@@ -36,9 +36,6 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">
                     <!-- item-->
-                    <a class="dropdown-item" href="apps-contacts-profile"><i class="mdi mdi-face-profile font-size-16 align-middle me-1"></i> @lang('translation.Profile')</a>
-                    <a class="dropdown-item" href="auth-lock-screen"><i class="mdi mdi-lock font-size-16 align-middle me-1"></i> @lang('translation.Lock_Screen')</a>
-                    <div class="dropdown-divider"></div>
                     <a class="dropdown-item " href="javascript:void();" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="bx bx-power-off font-size-16 align-middle me-1"></i> <span key="t-logout">@lang('translation.Logout')</span></a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
