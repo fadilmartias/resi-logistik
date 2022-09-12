@@ -86,12 +86,12 @@ class ResiController extends Controller
     {
         $resi = Resi::findOrFail($id);
 
-        return view('resi-pengiriman.preview', [
-            'resi' => $resi,
-        ]);
+            // return view('resi-pengiriman.preview', [
+            //     'resi' => $resi,
+            // ]);
 
-        // $pdf = Pdf::loadView('resi-pengiriman.preview', ['resi' => $resi]);
-        // return $pdf->download('invoice.pdf');
+        $pdf = Pdf::loadView('resi-pengiriman.preview', ['resi' => $resi]);
+        return $pdf->stream('resi.pdf');
 
         // $customPaper = array(0,0,300,900);
         // $pdf = App::make('dompdf.wrapper');
@@ -181,7 +181,7 @@ class ResiController extends Controller
             ]);
 
             $latest = History::latest()->first();
-            
+
             $data->update([
                 'history_id' => $latest->id,
             ]);
@@ -194,7 +194,7 @@ class ResiController extends Controller
             ]);
 
             $latest = History::latest()->first();
-            
+
             $data->update([
                 'history_id' => $latest->id,
             ]);
@@ -207,7 +207,7 @@ class ResiController extends Controller
             ]);
 
             $latest = History::latest()->first();
-            
+
             $data->update([
                 'history_id' => $latest->id,
             ]);
@@ -220,7 +220,7 @@ class ResiController extends Controller
             ]);
 
             $latest = History::latest()->first();
-            
+
             $data->update([
                 'history_id' => $latest->id,
             ]);
@@ -238,7 +238,7 @@ class ResiController extends Controller
             ]);
 
             $latest = History::latest()->first();
-            
+
             $data->update([
                 'history_id' => $latest->id,
             ]);
