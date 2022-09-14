@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title'); ?> <?php echo app('translator')->get('translation.Form_Validation'); ?>  <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 <?php $__env->startComponent('components.breadcrumb'); ?>
@@ -19,7 +18,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label class="form-label" for="validationCustom01">Nama Pengirim</label>
+                                <label class="form-label" for="validationCustom01">Nama Pengirim<sup class="text-danger">*</sup></label>
                                 <input type="text" class="form-control" id="validationCustom01" placeholder="Nama Pengirim" name="pengirim" value="<?php echo e(old('pengirim')); ?>"required>
                                 <div class="invalid-feedback">
                                     Masukkan nama pengirim yang valid.
@@ -28,7 +27,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label class="form-label" for="validationCustom02">Nama Penerima</label>
+                                <label class="form-label" for="validationCustom02">Nama Penerima<sup class="text-danger">*</sup></label>
                                 <input type="text" class="form-control" id="validationCustom02" placeholder="Nama Penerima" name="penerima" value="<?php echo e(old('penerima')); ?>"required>
                                 <div class="invalid-feedback">
                                     Masukkan nama penerima yang valid.
@@ -39,7 +38,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="mb-3">
-                                <label class="form-label" for="validationCustom03">Tanggal</label>
+                                <label class="form-label" for="validationCustom03">Tanggal<sup class="text-danger">*</sup></label>
                                 <input type="date" class="form-control" id="validationCustom03" placeholder="Tanggal" name="tanggal" value="<?php echo e(old('tanggal')); ?>" required>
                                 <div class="invalid-feedback">
                                     Masukkan tanggal yang valid.
@@ -48,7 +47,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="mb-3">
-                                <label class="form-label" for="validationCustom04">Berat</label>
+                                <label class="form-label" for="validationCustom04">Berat<sup class="text-danger">*</sup></label>
                                 <input type="text" class="form-control" id="validationCustom04" placeholder="Berat" name="berat" value="<?php echo e(old('berat')); ?>" required>
                                 <div class="invalid-feedback">
                                     Masukkan berat yang valid.
@@ -57,7 +56,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="mb-3">
-                                <label class="form-label" for="validationCustom05">Ukuran</label>
+                                <label class="form-label" for="validationCustom05">Ukuran<sup class="text-danger">*</sup></label>
                                 <input type="text" class="form-control" id="validationCustom05" placeholder="Ukuran" name="ukuran" value="<?php echo e(old('ukuran')); ?>" required>
                                 <div class="invalid-feedback">
                                     Masukkan ukuran yang valid.
@@ -66,7 +65,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="mb-3">
-                                <label class="form-label" for="validationCustom05">Isi</label>
+                                <label class="form-label" for="validationCustom05">Isi<sup class="text-danger">*</sup></label>
                                 <input type="text" class="form-control" id="validationCustom05" placeholder="Isi" name="isi" value="<?php echo e(old('isi')); ?>" required>
                                 <div class="invalid-feedback">
                                     Masukkan isi yang valid.
@@ -75,13 +74,25 @@
                         </div>
                     <div class="col-md-4">
                         <div class="mb-3">
-                            <label class="form-label" for="validationCustom05">Layanan</label>
+                            <label class="form-label" for="validationCustom05">Layanan<sup class="text-danger">*</sup></label>
                             <input type="text" class="form-control" id="validationCustom05" placeholder="Layanan" name="layanan" value="<?php echo e(old('layanan')); ?>" required>
                             <div class="invalid-feedback">
                                 Masukkan layanan yang valid.
                             </div>
                         </div>
                     </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label" for="validationCustom05">Lokasi Paket Terkini<sup
+                                        class="text-danger">*</sup></label>
+                                <input type="text" class="form-control" id="validationCustom05"
+                                    placeholder="Lokasi Paket Terkini" name="lokasi"
+                                    value="<?php echo e(old('lokasi')); ?>" required>
+                                <div class="invalid-feedback">
+                                    Masukkan lokasi yang valid.
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="row float-end">
                         <div class="col-xl-12">

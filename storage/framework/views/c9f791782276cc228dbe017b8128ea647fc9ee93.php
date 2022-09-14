@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('title'); ?>
     Data Resi Pengiriman
 <?php $__env->stopSection(); ?>
@@ -51,6 +50,7 @@
                                     <th scope="col">Pengirim</th>
                                     <th scope="col">Penerima</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">Lokasi Paket Terkini</th>
                                     <th style="width: 80px; min-width: 80px;">Action</th>
                                 </tr>
                             </thead>
@@ -67,15 +67,16 @@
                                         <td><?php echo e($data->penerima); ?></td>
                                         <td>
                                             <?php if($data->history->first()->status == 'Barang telah diterima oleh penerima'): ?>
-                                                <p class="text-success"><?php echo e($data->history->first()->status); ?></p>
+                                                <span class="text-success"><?php echo e($data->history->first()->status); ?></span>
                                             <?php elseif($data->history->first()->status == 'Pengiriman barang dibatalkan oleh kurir'): ?>
-                                                <p class="text-danger"><?php echo e($data->history->first()->status); ?></p>
-                                            <?php elseif($data->history->first()->status == 'Barang telah dipacking dan siap dijemput oleh kurir'): ?>
-                                                <p class="text-dark"><?php echo e($data->history->first()->status); ?></p>
+                                                <span class="text-danger"><?php echo e($data->history->first()->status); ?></span>
+                                            <?php elseif($data->history->first()->status == 'Barang telah dipacking dan siap dijemput oleh kurir'|| $data->history->first()->status == 'Paket sedang berada di perjalanan menuju alamat penerima'): ?>
+                                                <span class="text-dark"><?php echo e($data->history->first()->status); ?></span>
                                             <?php else: ?>
-                                                <p class="text-warning"><?php echo e($data->history->first()->status); ?></p>
+                                                <span class="text-dark"><?php echo e($data->history->first()->status . ' ' . $data->history->first()->lokasi); ?></span>
                                             <?php endif; ?>
                                         </td>
+                                        <td><?php echo e($data->history->first()->lokasi); ?></td>
                                         <td>
                                             <div class="d-flex gap-2">
                                                 <?php if(auth()->check() && auth()->user()->hasRole('Admin')): ?>
@@ -101,10 +102,12 @@
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#info<?php echo e($data->id); ?>">Info</button>
                                                     <?php else: ?>
+                                                    <a href="<?php echo e(route('resi-pengiriman.edit', $data->id)); ?>"
+                                                        class="btn btn-warning"><i class="bx bx-edit"></i> </a>
                                                         <a href="<?php echo e(route('resi-pengiriman.check', $data->id)); ?>"
-                                                            class="btn btn-success"><i data-feather="check"></i> </a>
+                                                            class="btn btn-success"><i class="bx bx-check"></i> </a>
                                                         <a href="<?php echo e(route('resi-pengiriman.cancel', $data->id)); ?>"
-                                                            class="btn btn-danger"><i data-feather="x"></i> </a>
+                                                            class="btn btn-danger"><i class="bx bx-x"></i> </a>
                                                     <?php endif; ?>
                                                 <?php endif; ?>
                                             </div>

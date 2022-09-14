@@ -44,13 +44,15 @@ class ResiController extends Controller
             'layanan' => 'required',
             'pengirim' => 'required',
             'penerima' => 'required',
+            'lokasi' => 'required',
         ]);
 
         $nomor_resi = rand(1000000000,9999999999);
 
         History::create([
             'nomor_resi' => $nomor_resi,
-            'status' => 'Barang telah dipacking dan siap dijemput oleh kurir'
+            'status' => 'Barang telah dipacking dan siap dijemput oleh kurir',
+            'lokasi' => $validatedData['lokasi'],
         ]);
 
         $history = History::latest()->first();
@@ -118,7 +120,7 @@ class ResiController extends Controller
 
     public function update(Request $request, $id)
     {
-        $data = Resi::findOrFail($id);
+        $resi = Resi::findOrFail($id);
 
         $validatedData = $request->validate([
             'tanggal' => 'required',
@@ -128,9 +130,11 @@ class ResiController extends Controller
             'layanan' => 'required',
             'pengirim' => 'required',
             'penerima' => 'required',
+            'lokasi' => 'required',
+            'status' => 'required',
         ]);
 
-        $data->update([
+        $resi->update([
             'tanggal'   => $validatedData['tanggal'],
             'berat'   => $validatedData['berat'],
             'ukuran' => $validatedData['ukuran'],
@@ -139,6 +143,18 @@ class ResiController extends Controller
             'pengirim' => $validatedData['pengirim'],
             'penerima' => $validatedData['penerima'],
         ]);
+
+        History::create([
+            'nomor_resi' => $resi->nomor,
+            'status' => $validatedData['status'],
+            'lokasi' => $validatedData['lokasi'],
+        ]);
+
+        $latest = History::latest()->first();
+
+            $resi->update([
+                'history_id' => $latest->id,
+            ]);
 
         return to_route('resi-pengiriman.index');
     }
@@ -157,13 +173,12 @@ class ResiController extends Controller
     public function check(Request $request, $id)
     {
         $data = Resi::findOrFail($id);
+        $history = History::with('resi')->where('nomor_resi', $data->nomor)->latest()->first();
 
-        $history = History::where('nomor_resi', $data->nomor)->latest()->first();
-
-        if ($history->status == 'Barang telah dipacking dan siap dijemput oleh kurir') {
             History::create([
                 'nomor_resi' => $data->nomor,
-                'status' => 'Barang sedang dijemput oleh kurir'
+                'status' => 'Barang telah diterima oleh penerima',
+                'lokasi' => $history->lokasi,
             ]);
 
             $latest = History::latest()->first();
@@ -172,69 +187,18 @@ class ResiController extends Controller
                 'history_id' => $latest->id,
             ]);
 
-        }
-
-        elseif ($history->status == 'Barang sedang dijemput oleh kurir') {
-            History::create([
-                'nomor_resi' => $data->nomor,
-                'status' => 'Barang sedang dikirim'
-            ]);
-
-            $latest = History::latest()->first();
-
-            $data->update([
-                'history_id' => $latest->id,
-            ]);
-        }
-
-        elseif ($history->status == 'Barang sedang dikirim') {
-            History::create([
-                'nomor_resi' => $data->nomor,
-                'status' => 'Barang tiba di drop point tujuan'
-            ]);
-
-            $latest = History::latest()->first();
-
-            $data->update([
-                'history_id' => $latest->id,
-            ]);
-        }
-
-        elseif ($history->status == 'Barang tiba di drop point tujuan') {
-            History::create([
-                'nomor_resi' => $data->nomor,
-                'status' => 'Barang sedang diantar ke alamat tujuan'
-            ]);
-
-            $latest = History::latest()->first();
-
-            $data->update([
-                'history_id' => $latest->id,
-            ]);
-        }
-
-        elseif ($history->status == 'Barang sedang diantar ke alamat tujuan') {
-            History::create([
-                'nomor_resi' => $data->nomor,
-                'status' => 'Barang telah diterima oleh penerima'
-            ]);
-
-            $latest = History::latest()->first();
-
-            $data->update([
-                'history_id' => $latest->id,
-            ]);
-        }
-        return to_route('resi-pengiriman.index');
+            return to_route('resi-pengiriman.index');
     }
 
     public function cancel(Request $request, $id)
     {
         $data = Resi::findOrFail($id);
+        $history = History::with('resi')->where('nomor_resi', $data->nomor)->latest()->first();
 
             History::create([
                 'nomor_resi' => $data->nomor,
                 'status' => 'Pengiriman barang dibatalkan oleh kurir',
+                'lokasi' => $history->lokasi,
             ]);
 
             $latest = History::latest()->first();

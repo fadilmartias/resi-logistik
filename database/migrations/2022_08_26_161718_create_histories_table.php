@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('nomor_resi');
             $table->string('status');
+            $table->string('lokasi');
             $table->timestamps();
         });
     }

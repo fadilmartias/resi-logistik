@@ -51,6 +51,7 @@
                                     <th scope="col">Pengirim</th>
                                     <th scope="col">Penerima</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">Lokasi Paket Terkini</th>
                                     <th style="width: 80px; min-width: 80px;">Action</th>
                                 </tr>
                             </thead>
@@ -67,15 +68,16 @@
                                         <td>{{ $data->penerima }}</td>
                                         <td>
                                             @if ($data->history->first()->status == 'Barang telah diterima oleh penerima')
-                                                <p class="text-success">{{ $data->history->first()->status }}</p>
+                                                <span class="text-success">{{ $data->history->first()->status }}</span>
                                             @elseif ($data->history->first()->status == 'Pengiriman barang dibatalkan oleh kurir')
-                                                <p class="text-danger">{{ $data->history->first()->status }}</p>
-                                            @elseif ($data->history->first()->status == 'Barang telah dipacking dan siap dijemput oleh kurir')
-                                                <p class="text-dark">{{ $data->history->first()->status }}</p>
+                                                <span class="text-danger">{{ $data->history->first()->status }}</span>
+                                            @elseif ($data->history->first()->status == 'Barang telah dipacking dan siap dijemput oleh kurir'|| $data->history->first()->status == 'Paket sedang berada di perjalanan menuju alamat penerima')
+                                                <span class="text-dark">{{ $data->history->first()->status }}</span>
                                             @else
-                                                <p class="text-warning">{{ $data->history->first()->status }}</p>
+                                                <span class="text-dark">{{ $data->history->first()->status . ' ' . $data->history->first()->lokasi }}</span>
                                             @endif
                                         </td>
+                                        <td>{{ $data->history->first()->lokasi }}</td>
                                         <td>
                                             <div class="d-flex gap-2">
                                                 @role('Admin')
@@ -101,10 +103,12 @@
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#info{{ $data->id }}">Info</button>
                                                     @else
+                                                    <a href="{{ route('resi-pengiriman.edit', $data->id) }}"
+                                                        class="btn btn-warning"><i class="bx bx-edit"></i> </a>
                                                         <a href="{{ route('resi-pengiriman.check', $data->id) }}"
-                                                            class="btn btn-success"><i data-feather="check"></i> </a>
+                                                            class="btn btn-success"><i class="bx bx-check"></i> </a>
                                                         <a href="{{ route('resi-pengiriman.cancel', $data->id) }}"
-                                                            class="btn btn-danger"><i data-feather="x"></i> </a>
+                                                            class="btn btn-danger"><i class="bx bx-x"></i> </a>
                                                     @endif
                                                 @endrole
                                             </div>

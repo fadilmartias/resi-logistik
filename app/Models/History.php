@@ -14,6 +14,7 @@ class History extends Model
     protected $fillable = [
         'nomor_resi',
         'status',
+        'lokasi',
     ];
 
     /**

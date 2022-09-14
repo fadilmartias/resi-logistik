@@ -17,7 +17,8 @@ class HistorySeeder extends Seeder
     {
         History::create([
             'nomor_resi' => 11950115110,
-            'status' => 'Barang telah dipacking dan siap dijemput oleh kurir'
+            'status' => 'Barang telah dipacking dan siap dijemput oleh kurir',
+            'lokasi' => 'Pekanbaru'
         ]);
     }
 }
