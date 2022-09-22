@@ -1,3 +1,4 @@
+
 <?php $__env->startSection('title'); ?>
 <?php echo app('translator')->get('translation.Login'); ?>
 <?php $__env->stopSection(); ?>
@@ -30,7 +31,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" value="<?php echo e(old('email', 'admin@themesdesign.com')); ?>" id="input-username" placeholder="Enter User Name" name="email">
+unset($__errorArgs, $__bag); ?>" value="<?php echo e(old('email', 'admin@logos.com')); ?>" id="input-username" placeholder="Enter User Name" name="email">
                                         <?php $__errorArgs = ['email'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
